@@ -1,0 +1,65 @@
+# The PC4 neighborhood for which ev flexibility metrics need to be calculated.
+pc4 = 1055
+
+# The duration of the simulation timestep. PTU is used as a term in the energy domain to show the smallest increment
+# of time on which energy production and consumption is matched.
+# Adding this field is optional.
+# Default: 15 minutes.
+ptu-duration-minutes = 15
+
+# The duration of congestion in PTU durations. Expects a list of integer numbers.
+congestion-durations-ptu = [4, 8, 16, 20, 24, 32]
+
+# The duration of the flex window in PTU durations. Expects a list of integer numbers. If ptu-duration-minutes=15 then 4 equals to 15 * 4 = 60 minutes.
+flex-window-durations-ptu = [96]
+
+# Flex window always starts relative to the congestion start. This field sets how many PTU's the flex window starts before congestion start.
+flex-window-start-before-congestion-start-ptu = 24
+
+# The date and times at which a congestion start should be simulated. Either this field or table 'congestion-starts-iterate-until' may be set. If both are set, this field takes precedence.
+congestion-start-moments = [
+    2020-06-03T07:00:00Z,
+    2020-06-03T08:00:00Z,
+    2020-06-03T09:00:00Z,
+    2020-06-03T10:00:00Z,
+    2020-06-03T16:00:00Z,
+    2020-06-03T17:00:00Z,
+    2020-06-03T18:00:00Z,
+    2020-06-03T19:00:00Z,
+    2020-06-03T20:00:00Z,
+    2020-06-03T21:00:00Z,
+    2020-06-06T07:00:00Z,
+    2020-06-06T08:00:00Z,
+    2020-06-06T09:00:00Z,
+    2020-06-06T10:00:00Z,
+    2020-06-06T16:00:00Z,
+    2020-06-06T17:00:00Z,
+    2020-06-06T18:00:00Z,
+    2020-06-06T19:00:00Z,
+    2020-06-06T20:00:00Z,
+    2020-06-06T21:00:00Z,
+]
+
+[input]
+# The charge session information.
+charge-sessions-path-parquet = "./wp4_shifted_flexible_profiles/input/cleaned/20231102 ChargeSessionsPrivateCharging.parquet"
+# The energy profiles which belong to each charge session.
+energy-profiles-path-template-parquet= "./wp4_shifted_flexible_profiles/input/cleaned/20231102_charge_session_energy_profiles/chargesessionprofile_pc4_year_{pc4}.parquet"
+
+[output]
+# The start of the output profile.
+profile-start = 2020-06-01T00:00:00Z
+# The end of the output profile.
+profile-end = 2020-06-15T00:00:00Z
+
+[output.baseline-profiles]
+# The file format to use for output files. Options are parquet and csv.
+file-format = "parquet"
+# Where to save the baseline profiles. Expects a directory.
+output-dir = "output_shifted_profiles/baselines/"
+
+[output.shifted-profiles]
+# The file format to use for output files. Options are parquet and csv.
+file-format = "parquet"
+# Where to save the baseline profiles. Expects a directory.
+output-dir = "output_shifted_profiles/shifted/"

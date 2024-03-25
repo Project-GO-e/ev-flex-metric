@@ -1,0 +1,6 @@
+avro
+pytz
+openpyxl
+pandas
+fastparquet
+dataclass-binder ~= 0.3.4

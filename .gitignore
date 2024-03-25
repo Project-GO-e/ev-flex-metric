@@ -1,0 +1,11 @@
+.idea/
+**.pyc
+.venv/
+.mypy_cache/
+.pytest_cache/
+unit_test_coverage/
+.coverage
+output_shifted_profiles/
+dist/
+build/
+ev-flex-metric.spec
